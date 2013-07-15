@@ -5,7 +5,7 @@ namespace OAuth2\Provider;
 use OAuth2\Provider;
 use OAuth2\Token_Access;
 
-class Facebook extends Provider
+class Twitter extends Provider
 {
 	public $name = 'twitter';
 
