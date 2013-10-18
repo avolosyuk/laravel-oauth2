@@ -31,13 +31,15 @@ class Facebook extends Provider
 
 		$user = json_decode(file_get_contents($url));
 
+		$location = isset($user->hometown) && isset($user->hometown->name) ? $user->hometown->name : '';
+
 		// Create a response from the request
 		return array(
 			'uid' => $user->id,
 			'nickname' => $user->username,
 			'name' => $user->name,
 			'email' => $user->email,
-			'location' => $user->hometown->name,
+			'location' => $location,
 			// 'description' => $user->bio,
 			'image' => 'https://graph.facebook.com/me/picture?type=normal&access_token='.$token->access_token,
 			'urls' => array(
