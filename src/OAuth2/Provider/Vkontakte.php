@@ -28,9 +28,9 @@ class Vkontakte extends Provider
 	public function get_user_info(Token_Access $token)
 	{
 		$url = 'https://api.vk.com/method/users.get?'.http_build_query(array(
-			'access_token' => $token->access_token,
-			'fields' => $this->fields,
-		));
+				'access_token' => $token->access_token,
+				'fields' => $this->fields,
+			));
 
 		$response = json_decode(file_get_contents($url));
 		$user = $response->response[0];
@@ -39,9 +39,13 @@ class Vkontakte extends Provider
 		return array(
 			'uid' => $user->uid,
 			'nickname' => isset($user->nickname) ? $user->nickname : "",
-			'name' => $user->first_name.' '.$user->last_name,
+			'first_name' => $user->first_name,
+			'last_name' => $user->last_name,
 			'email' => isset($user->email) ? $user->email : "",
 			'image' => isset($user->photo_max_orig) ? $user->photo_max_orig : "",
+			'sex' => isset($user->sex) ? $user->sex : "",
+			'bdate' => isset($user->bdate) ? $user->bdate : "",
+			'city' => isset($user->city) ? $user->city : ""
 		);
 	}
 }
